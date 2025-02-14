@@ -1,1 +1,24 @@
+Functional Interface :-
+--------------------
+An interface that contains exactly one abstract method. 
+It can have default and static methods, but only one abstract method. 
+Functional interfaces are used to support lambda expressions and method references, which are key features for enabling functional programming paradigms in Java. 
 
+The @FunctionalInterface annotation can be used to explicitly declare an interface as a functional interface. While not mandatory, it's good practice as it helps the compiler catch errors 
+if the interface doesn't conform to the rules of a functional interface (i.e., having exactly one abstract method). 
+
+Common examples of functional interfaces in Java include Runnable, Callable, Predicate, Function, Consumer, and Supplier, all found in the java.util.function package.
+---------------------------------------------------------------------------------------------------------------------
+Lambda Expressions :-
+-----------------------
+A lamba expression is a compact way of defining anonymous methods in java.
+Reduces boilerplate code.
+Enables functional programming, focusing on what to do rather than how to do it.
+Lamba expressions are tightly coupled with Functional interface, with out FI we can't implement LE's
+LE implemtation is nothing but anonymous method implementation.
+
+Paramter types : Java infers types, so they are not mandatory.
+Parentheses: For single paramters, Parentheses can be omitted.
+Return: Single line expressions auto return values.
+void: if the lambda body performs an action and doesn't return a value, it automatically adapts to a void return type.
+---------------------------------------------------------------------------------------------------------------------
