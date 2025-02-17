@@ -75,7 +75,5 @@ Default Methods in Consumer Interface:
 1. andThen():
 The andThen() method allows you to chain another Consumer to the current one. It returns a new Consumer that first applies the current Consumer's action and 
 then applies the action of the after Consumer.
-2. identity() (Static Method):
-This method returns a Consumer that simply performs the identity operation on its input. That is, it accepts the argument and does nothing with it (i.e., it doesn’t modify or affect the input). This is useful in certain cases where you might need a Consumer that doesn't change the input.
----------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------
 
