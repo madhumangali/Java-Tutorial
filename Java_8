@@ -22,3 +22,44 @@ Parentheses: For single paramters, Parentheses can be omitted.
 Return: Single line expressions auto return values.
 void: if the lambda body performs an action and doesn't return a value, it automatically adapts to a void return type.
 ---------------------------------------------------------------------------------------------------------------------
+Predicate FI :-
+-----------------------
+the Predicate interface is a part of the java.util.function package and represents a single argument function that returns a boolean value. 
+It's used to evaluate a condition on a given input. The Predicate functional interface is often used in situations where you need to filter, test, or validate data.
+
+boolean test(T t);
+
+Key Characteristics of Predicate:
+It takes one argument of a specific type and returns a boolean result.
+It's a functional interface, meaning it can be used in lambda expressions and method references.
+
+Chaining Predicates:
+You can also combine multiple predicates using the default methods and(), or(), and negate() provided by the Predicate interface.
+and(): Returns a predicate that represents the logical AND of two predicates.
+or(): Returns a predicate that represents the logical OR of two predicates.
+negate(): Returns a predicate that negates the result of the original predicate.
+---------------------------------------------------------------------------------------------------------------------
+Function FI :-
+-----------------------
+The Function interface is a functional interface in the java.util.function package.
+It represents a function that takes an argument of type T and returns a result of type R. 
+The Function interface is commonly used in Java to represent transformations, mapping operations, or any computation where you convert one type into another.
+R apply(T t);
+The interface has a single method, apply(), which takes one argument of type T and returns a result of type R
+
+Default Methods in Function Interface:
+The Function interface provides several default methods that allow you to compose functions in a fluent manner. 
+These methods are:
+
+andThen(): It allows you to chain another function to the result of the current function.
+Syntax: Function<T, R> andThen(Function<? super R, ? extends V> after)
+The function is applied first, and then the after function is applied to the result
+
+compose(): It allows you to chain another function to the input of the current function.
+Syntax: Function<T, R> compose(Function<? super V, ? extends T> before)
+The before function is applied first, and then the function is applied to the result.
+
+identity(): Returns a function that always returns its input argument.
+Syntax: static <T> Function<T, T> identity()
+---------------------------------------------------------------------------------------------------------------------
+
