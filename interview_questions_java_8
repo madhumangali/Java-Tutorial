@@ -1,0 +1,182 @@
+What are the key features introduced in Java 8?
+
+Feature	                          Description
+--------------------------        -------------------------------
+Lambda Expressions	              Enables functional programming
+Functional Interfaces	            Introduces @FunctionalInterface and built-in interfaces like Predicate, Function, etc.
+Stream API	                      Efficient processing of collections with operations like filter, map, and reduce.
+Default and Static Methods	      Allows method implementation in interfaces.
+Optional Class	                  Handles null values safely.
+Date and Time API	                New immutable java.time package.
+Collectors API	                  Accumulates Stream elements into collections.
+CompletableFuture	                Enhances concurrency and asynchronous programming.
+Nashorn JavaScript Engine       	Executes JavaScript in Java.
+Base64 Encoding/Decoding	        Encodes and decodes data in Base64 format.
+Method References                 Method references provide a way to refer to methods without invoking them.
+
+--------------------------------------------------------------------------------------------------------------------------------
+Explain the difference between map() and flatMap() in Streams?
+
+Both map() and flatMap() are used to transform elements in Java 8 Streams, but they behave differently when handling nested structures.
+
+1. map()
+Used for one-to-one mapping.
+Transforms each element in the stream using a function.
+If the function returns a collection, map() will produce a nested structure (Stream<Stream<T>>).
+
+2. flatMap()
+Used for one-to-many mapping (flattens nested structures).
+Instead of Stream<Stream<T>>, it flattens elements into a single Stream<T>.
+Works well when transforming elements into collections.
+--------------------------------------------------------------------------------------------------------------------------------
+How do you use the filter() method in Java Streams?
+
+The filter() method in Java Streams API is used to process elements conditionally by applying a predicate (a boolean function). It helps to remove unwanted elements from a Stream and return a filtered Stream.
+
+Stream<T> filter(Predicate<? super T> predicate)
+Predicate<T> is a functional interface that takes an element and returns true (to keep it) or false (to remove it).
+The method returns a new Stream<T> containing only the elements that satisfy the predicate.
+
+Key Takeaways
+✅ filter() removes elements that don’t match the predicate.
+✅ Works with numbers, strings, objects, or null values.
+✅ Can be chained with other stream operations (map(), collect(), etc.).
+✅ Helps improve readability and reduces loop-based filtering.
+
+--------------------------------------------------------------------------------------------------------------------------------
+
+What is the purpose of Optional in Java 8, and how do you use it?
+
+The Optional class in Java 8 is used to handle null values safely and avoid NullPointerException (NPE). It acts as a container that may or may not contain a value.
+
+Why Use Optional?
+✅ Avoids NullPointerException
+✅ Reduces unnecessary null checks
+✅ Improves code readability and maintainability
+✅ Encourages functional programming
+
+Feature	                                Description
+--------------------------            -------------------------------
+Optional.of(value)	                   Throws NullPointerException if value is null.
+Optional.ofNullable(value)	           Allows null values safely.
+Optional.empty()	                     Represents an empty Optional.
+isPresent()	                            Checks if a value exists.
+orElse(defaultValue)	                  Returns value or default if empty.
+orElseGet(Supplier)	                    Generates default value lazily.
+orElseThrow(ExceptionSupplier)	       Throws exception if value is empty.
+ifPresent(Consumer)                    	Executes action if value exists.
+map(Function)	                          Transforms value if present.
+flatMap(Function<Optional>)	            Flattens nested Optionals.
+
+--------------------------------------------------------------------------------------------------------------------------------
+Explain Function, Consumer, Supplier, and Predicate functional interfaces?
+
+Java 8 introduced the Functional Interface concept, which allows us to use lambda expressions and method references for concise and readable code.
+Some commonly used functional interfaces in java.util.function package are
+
+Interface	           TakesInput?	          Returns Output?	            Use Case
+----------          ----------              ----------                  ----------
+Function<T, R>	     ✅ Yes (T)	            ✅ Yes (R)	               Transform data (e.g., convert, map)
+Consumer<T>         ✅ Yes (T)	               ❌ No                   Perform an action (e.g., print, log)
+Supplier<T>	           ❌ No	              ✅ Yes (T)	               Provide or generate values (e.g., random numbers, database connections)
+Predicate<T>	       ✅ Yes (T)           	✅ Yes (boolean)	         Test conditions (e.g., filtering, validation)
+
+--------------------------------------------------------------------------------------------------------------------------------
+What is the difference between forEach() and map() in Streams?
+
+Both forEach() and map() are commonly used methods in Java Streams, but they serve different purposes.
+
+Feature	                      forEach()	                                                                               map()
+----------------            ----------------                                                                       ----------------
+Purpose	             Performs an action on each element (like printing or modifying an external variable).	Transforms each element and returns a new Stream.
+Return               Type	void (does not return anything).	                                                Returns a Stream<R> of transformed elements.
+Usage	               Used for side-effects (e.g., printing, logging, modifying external data).	            Used for data transformation (e.g., converting, mapping, modifying elements).
+Intermediate/Terminal	Terminal operation (ends the stream pipeline).	                                      Intermediate operation (can be followed by other stream operations).
+Modification	       Cannot modify the original collection.	                                                Returns a new transformed collection
+
+--------------------------------------------------------------------------------------------------------------------------------
+Explain the concept of method references with examples?
+
+Method references in Java 8 are a shorthand syntax for lambda expressions that refer to methods directly without executing them.
+
+Method Reference                                      Type	Example
+----------------                                      ----------------  
+Static Method Reference	                              Math::sqrt (Replaces num -> Math.sqrt(num))
+Instance Method Reference (Specific Object)	          "hello"::toUpperCase (Replaces () -> message.toUpperCase())
+Instance Method Reference (Arbitrary Object)	        String::toUpperCase (Replaces name -> name.toUpperCase())
+Constructor Reference	                                ArrayList::new (Replaces () -> new ArrayList<>())
+
+--------------------------------------------------------------------------------------------------------------------------------
+What is the difference between parallelStream() and stream()?
+
+In Java 8, Streams API provides two types of streams:
+stream() → Creates a sequential stream (single-threaded).
+parallelStream() → Creates a parallel stream (multi-threaded).
+
+Feature	                    stream()	                                     parallelStream()
+----------------           ----------------                              ----------------  
+Execution Type	        Sequential (single thread)	                 Parallel (multiple threads)
+Performance	            Slower for large datasets	                    Faster for large datasets (uses multiple CPU cores)
+Threading	              Uses a single thread	                        Uses ForkJoinPool (common pool)
+Order Preservation	    Maintains original order	                    May not preserve order
+Use Case	              When order matters and data is small	        When performance is critical for large datasets
+
+--------------------------------------------------------------------------------------------------------------------------------
+How does Java 8 improve memory management and garbage collection?
+
+Java 8 introduced several improvements in memory management and garbage collection to enhance performance, scalability, and efficiency. The key enhancements are:
+
+1. Introduction of the Metaspace (Replacing PermGen)
+Problem in Older Java Versions (Before Java 8)
+In Java 7 and earlier, class metadata was stored in the Permanent Generation (PermGen).
+Issues with PermGen:
+Fixed-size memory allocation → Could lead to OutOfMemoryError: PermGen Space when many classes were loaded (e.g., in applications with a lot of dynamic class loading like Tomcat).
+Difficult to tune → Developers had to manually set -XX:MaxPermSize.
+Stored interned Strings, leading to performance issues.
+Solution in Java 8: Metaspace
+Java 8 replaced PermGen with Metaspace, which is part of native (off-heap) memory.
+Advantages of Metaspace: ✅ Dynamically grows/shrinks → No need to manually configure MaxPermSize.
+✅ More efficient GC → GC doesn’t scan metadata frequently, reducing overhead.
+✅ Prevents OutOfMemoryError: PermGen Space.
+
+2. Improvements in Garbage Collection (GC)
+Key Java 8 GC Enhancements
+Parallel GC Optimization
+
+Better object allocation in Eden space.
+Improved heap region resizing based on application behavior.
+G1 (Garbage First) GC as Default in Java 9 (Improved in Java 8)
+
+Java 8 introduced improvements to the G1 GC (designed for large heaps, >4GB).
+G1 GC advantages: ✅ Low-pause garbage collection (better for real-time apps).
+✅ Efficient region-based heap management (reduces fragmentation).
+✅ Adaptive tuning for different workloads.
+
+Parallel Full GC for G1
+Java 8 parallelized full GC in G1 GC, making it faster.
+
+Compressed OOPs (Object Pointers) Enhancement
+Saves memory by reducing object pointer sizes when using less than 32GB of heap.
+
+Feature	                                        Benefit
+--------                                        --------
+Metaspace (Replaces PermGen)	                Dynamic class metadata allocation, prevents OutOfMemoryError
+G1 GC Optimization	                          Low-pause, efficient memory management for large heaps
+Parallel Full GC (G1)	                        Faster garbage collection in large-scale apps
+Compressed OOPs Enhancement	                  Reduced pointer size, saves memory in large heaps
+Lambda & Functional Interfaces	              Less object creation, efficient method references
+Optional Class	                              Avoids NullPointerException, reduces memory leaks
+Streams API                                  	Lazy evaluation, reduces intermediate memory usage
+
+--------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
