@@ -1,0 +1,26 @@
+What is immutable class, and how do you create one?
+
+An immutable class is a class whose objects cannot be modified after creation. 
+If any change is required, a new object must be created instead of modifying the existing one.
+
+To make a class immutable, follow these 5 rules:
+Declare the class as final (so it cannot be extended).
+Make all fields private and final (so they cannot be changed).
+Do not provide setters (no methods to modify fields).
+Initialize all fields in the constructor (so they can be set only once).
+Return defensive copies of mutable objects instead of direct references.
+
+String is immutable in Java. Once a String object is created, its value cannot be changed. Any modification to a String creates 
+a new object instead of changing the existing one.
+Since String is immutable, Java provides StringBuilder (mutable alternative) for better performance when modifying strings frequently.
+----------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
