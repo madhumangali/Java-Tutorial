@@ -14,6 +14,30 @@ String is immutable in Java. Once a String object is created, its value cannot b
 a new object instead of changing the existing one.
 Since String is immutable, Java provides StringBuilder (mutable alternative) for better performance when modifying strings frequently.
 ----------------------------------------------------------------------------------------------------------------------------------
+difference b/w String buffer and String Builder?
+
+Both StringBuffer and StringBuilder are mutable (modifiable) versions of String. The key difference lies in synchronization and performance.
+
+Feature	                StringBuffer	                        StringBuilder     
+-----------            -----------------                        -----------------
+Mutability	         Mutable (modifiable)	                   Mutable (modifiable)
+Thread Safety	       ✅ Thread-safe (Synchronized)	         ❌ Not thread-safe (Faster)
+Performance	         Slower due to synchronization	         Faster (No synchronization)
+Usage	               Multi-threaded environments	           Single-threaded applications
+
+----------------------------------------------------------------------------------------------------------------------------------
+what are the iterators, how many types of iterators are there
+
+Feature	                         Iterator	             ListIterator	                    Enumeration
+-----------                       -----------          -----------                      -----------
+Applicable Collections	         List, Set, Queue	       List only	                    Vector, Hashtable
+Forward Traversal	               ✅ Yes                 	✅ Yes	                      ✅ Yes
+Backward Traversal	             ❌ No	                  ✅ Yes	                      ❌ No
+Modification Allowed	           ✅ (Only remove())	      ✅ (add(), remove(), set())	❌ No
+Thread-Safety	                   ❌ No	                  ❌ No	                         ✅ Yes
+Usage	                           Modern collections	      Only for List	                 Legacy classes
+Methods                  hasNext(), next(), iterator()   hasPrevious, previous()         hasMoreElements(), nextElement(), .elements()
+----------------------------------------------------------------------------------------------------------------------------------
 
 
 
