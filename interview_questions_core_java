@@ -38,12 +38,91 @@ Thread-Safety	                   ❌ No	                  ❌ No	               
 Usage	                           Modern collections	      Only for List	                 Legacy classes
 Methods                  hasNext(), next(), iterator()   hasPrevious, previous()         hasMoreElements(), nextElement(), .elements()
 ----------------------------------------------------------------------------------------------------------------------------------
+What is Serailizable?
 
+Serializable is a marker interface in Java that allows objects to be converted into a stream of bytes so they can be saved to a file, 
+transferred over a network, or stored in a database.
 
+1️⃣ Default serialization saves the entire object.
+2️⃣ Can be customized using transient keyword (prevents a field from being serialized).
+3️⃣ Can implement Externalizable for custom serialization logic.
+4️⃣ Not suitable for sensitive data (use encryption instead).
+----------------------------------------------------------------------------------------------------------------------------------
+how may types of interfaces are there?
 
+Java provides different types of interfaces based on their structure and functionality. Below are the 5 main types of interfaces:
 
+1️⃣ Normal Interface (Regular Interface)
+A normal interface contains only abstract methods (before Java 8). From Java 8 onwards, it can also have default and static methods.
+✅ Key Points:
+Contains only abstract methods (before Java 8).
+Can have default and static methods (from Java 8).
+Used for multiple inheritance.
 
+2️⃣ Functional Interface
+A functional interface has exactly one abstract method. It can have default and static methods.
+✅ Key Points:
+Contains exactly one abstract method.
+Can have multiple default and static methods.
+Used in Lambda Expressions & Functional Programming.
+Examples: Runnable, Callable, Comparator.
 
+3️⃣ Marker Interface
+A marker interface has no methods or fields. It is used to signal the JVM that a class has special behavior.
+✅ Key Points:
+Used to mark a class for special behavior.
+Examples: Serializable, Cloneable, Remote.
+
+4️⃣ Tagging Interface (Similar to Marker Interface)
+A tagging interface is similar to a marker interface but is used for categorization in frameworks like Spring and Hibernate.
+✅ Key Points:
+Used in Spring, Hibernate, and Java EE.
+Example: Remote in RMI.
+
+5️⃣ Nested Interface (Inner Interface)
+An interface declared inside another interface or class.
+✅ Key Points:
+Used for grouping related functionality.
+Example: Map.Entry (inside Map).
+----------------------------------------------------------------------------------------------------------------------------------
+Comparison of contains() in Different Collections
+
+Collection	                     Implementation	                            Time Complexity
+------------                     ------------                              ------------
+ArrayList	                   Linear Search (indexOf(), uses .equals())	    O(n)
+LinkedList	                 Iterates nodes (uses .equals())	              O(n)
+HashSet	                     Hashing + .equals()	                          O(1) (avg.), O(n) (worst)
+TreeSet                      Binary Search Tree (compareTo())	              O(log n)
+HashMap.containsKey()	       Hashing + .equals()	                          O(1) (avg.), O(n) (worst)
+----------------------------------------------------------------------------------------------------------------------------------
+How distinct() Works Internally in Java Streams
+
+@Override
+public Stream<T> distinct() {
+    return boxed().collect(Collectors.toCollection(LinkedHashSet::new)).stream();
+}
+
+Uses a LinkedHashSet
+The LinkedHashSet maintains insertion order and ensures uniqueness.
+This is why distinct() keeps the original order.
+Collects elements into a LinkedHashSet first, then converts back to a stream.
+
+By default, distinct() relies on .equals() and hashCode().
+For custom objects, override these methods.
+
+@Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Employee employee = (Employee) o;
+        return id == employee.id && Objects.equals(name, employee.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name);
+    }
+----------------------------------------------------------------------------------------------------------------------------------
 
 
 
