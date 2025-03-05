@@ -1,0 +1,27 @@
+Core Features of Reactive Programming
+--------------------------------------
+1. New Programming Paradigm
+2. Asynchronous and non blocking
+3. Functional Style code
+4. Data Flow as event driven stream
+5. Backpressure on data streams
+
+synchronous and blocking :-
+--------------------------
+
+swiggy -> Restaurant -> cook.
+
+Took the customer's order
+Told cook for prepare order
+Waited for the food to be cooked
+Gave it to the customer
+After all of that, then took the
+next person's order.
+
+Asynchronous and non blocking :-
+-------------------------------
+Restaurant (Subscriber) -> Cook (Publisher)
+1.Take a customer's order
+2.Tell the cook to prepare food
+3.Instead of waiting for it to be cooked, take the next person's order and listen for (subscribe to) the cook to tell you the first customer's food is done
+4.Once the food is done, you give the food to the customer
