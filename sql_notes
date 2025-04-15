@@ -1,0 +1,154 @@
+what is SQL ?
+sql is known as structured query language.
+sql is standard programming lanuage which is used to manage & manipulate the relational databases.
+---------------------------------------------------------------------------------------------
+what is primary key, unique key and foriegn key and there differences ?
+
+A primary key is a column (or combination of columns) that uniquely identifies each row in a table
+=> must be unique
+=> can't be null
+=> each table contains only one primary key
+
+A unique key also ensures that all value int he column are unique, but allows one null (in most databse like MYSQl)
+=> must be unique
+=> can contain null
+=> A table can have multiple unique keys
+
+A Foreign key is used to create a relationship b/w two tables, it references the primary key of another table>
+  => enforces referntail integrity
+  => can contain null values (if Optinal)
+  => can have duplicate values.
+  => can't insert a value unless it exits in the referenced table.
+
+Feature	                          Primary Key	          Unique Key	         Foreign Key
+Uniqueness	                      ✅ Must be unique 	✅ Must be unique	     ❌ Can be duplicate
+NULL Allowed	                    ❌ Not allowed	    ✅ One NULL (MySQL)	  ✅ Allowed (optional ref)
+Count per table	                  1 only	            Many allowed	          Many allowed
+Purpose	                          Identity	          Prevent duplicates	    Link tables
+Used to reference another table?	❌ No	              ❌ No	                ✅ Yes (references PK/UK)
+
+---------------------------------------------------------------------------------------------
+what are constraints in SQL ?
+
+Constaints are rules that are applied to the columns/tables to enforce data integrity, accuracy and consistency.
+
+Here’s a list of the most common constraints:
+
+Constraint	                Description
+PRIMARY KEY	        Uniquely identifies each row in a table.
+FOREIGN KEY	        Ensures referential integrity between tables.
+UNIQUE	            Ensures all values in a column are different.
+NOT NULL	          Prevents NULL values from being inserted.
+CHECK	              Ensures values meet a specific condition.
+DEFAULT	            Provides a default value for a column.
+---------------------------------------------------------------------------------------------
+Query to retrieve all records from a table ?
+select * from employees;
+---------------------------------------------------------------------------------------------
+difference b/w  DELETE and truncate?
+
+Feature	                         DELETE	                            TRUNCATE
+Used for	                 Removing specific rows or all rows	   Removing all rows from a table
+Can filter rows?	         ✅ Yes, using WHERE	                 ❌ No – removes all rows
+Rollback (Undo)?	         ✅ Yes (if inside a transaction)	   ⚠️ Depends (usually not rollbackable)
+Speed	                     Slower (row-by-row)	                 Faster (bulk operation)
+Resets Auto Increment?	   ❌ No	                               ✅ Yes (in many DBMS)
+Triggers fire?	           ✅ Yes	                                 ❌ No
+Locks                    	 Row-level locks	                      Table-level lock
+
+DELETE FROM employees WHERE department = 'HR';
+TRUNCATE TABLE employees;
+
+---------------------------------------------------------------------------------------------
+find max salary from employees table?
+select max(salary) from employees;
+---------------------------------------------------------------------------------------------
+Query to fetch the second highest salary
+select max(salary) from employee where salary < ( select max(salary) from employee ) 
+---------------------------------------------------------------------------------------------
+what is join and explain it types?
+
+A JOIN is used to retrieve data from multiple tables where there is a logical relationship between them.
+
+Type of                      JOIN	Description
+INNER JOIN	        Returns only matching rows in both tables
+LEFT JOIN	          Returns all rows from the left table + matched rows from the right
+RIGHT JOIN	        Returns all rows from the right table + matched rows from the left
+FULL JOIN	          Returns rows when there is a match in either left or right
+SELF JOIN         	A table joined with itself
+CROSS JOIN	        Returns the Cartesian product (all combinations)
+---------------------------------------------------------------------------------------------
+Query to fecth employee name and dept name using join
+
+select e.employee_name, dept.dept_name form employee as e
+join department as dept on dept.dept_id = e.dept_id
+---------------------------------------------------------------------------------------------
+explain Groupby clause?
+
+The GROUP BY clause groups rows that have the same values in specified columns into summary rows, like:
+total salary per department
+count of orders per customer
+average score per student
+
+=> Every column in SELECT that is not aggregated must be in the GROUP BY.
+=> Use HAVING to filter groups (not WHERE).
+---------------------------------------------------------------------------------------------
+Query to count employees in each dept?
+
+select count(*), dept_id from employees group by dept_id;
+---------------------------------------------------------------------------------------------
+difference b/w having and where
+
+Feature                  	WHERE	                    HAVING
+Used for	           Filtering rows	              Filtering groups (after GROUP BY)
+Works with	         Raw data (before grouping)	   Aggregate data (like SUM, AVG)
+When it runs	       Before grouping	              After grouping
+Can use aggregates?	    ❌ No	                     ✅ Yes
+
+---------------------------------------------------------------------------------------------
+query to fetch the departments with more than 5 employees?
+
+select dept_id,count(*) from employees group by dept_id having count(*) > 5
+---------------------------------------------------------------------------------------------
+UNION vs UNION ALL
+
+UNION and UNION ALL are both used to combine results from two or more SELECT statements in SQL — but there's a key difference in how they handle duplicates.
+
+Feature	                  UNION	                                       UNION ALL
+Duplicates	      ❌ Removes duplicates	                           ✅ Keeps duplicates
+Performance	      🐢 Slower (needs sorting for duplicates)	      ⚡ Faster (no duplicate check)
+Sorting	          Automatically sorts results (in many DBs)     	No sorting unless you add ORDER BY
+Use case	        When you want distinct results	                When you want everything (faster)
+
+---------------------------------------------------------------------------------------------
+what is SubQuery?
+
+A subquery (also called an inner query or nested query) is a query written inside another SQL query. It's used to return data that the main query (outer query) will use.
+---------------------------------------------------------------------------------------------
+query to fecth all employees whose salary is greater than avg salary
+
+select * form employees where salary > (select avg(salary) from employees)
+---------------------------------------------------------------------------------------------
+
+---------------------------------------------------------------------------------------------
+
+---------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
