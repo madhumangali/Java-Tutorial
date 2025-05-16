@@ -578,5 +578,26 @@ Overloading is about having multiple methods with the same name but different pa
 Overriding is about redefining a superclass method in a subclass with the same signature (runtime)
 
 ------------------------------------------------------------------------------------
+JDK v/s JRE v/s JVM
 
+JDK (Java Development Kit)
+Purpose: Complete software development kit for Java.
+Includes: JRE (Java Runtime Environment), development tools like compiler (javac), debugger, and other utilities.
+Use Case: Needed for developing, compiling, and running Java applications.
+Platform Dependency: Platform-dependent (separate installers for Windows, Mac, Linux).
+Summary: If you want to write and compile Java code, you need the JDK.
+
+JRE (Java Runtime Environment)
+Purpose: Provides the environment to run Java applications.
+Includes: JVM (Java Virtual Machine), core libraries, and supporting files required for execution.
+Use Case: Needed only for running (not developing) Java applications.
+Platform Dependency: Platform-dependent (separate installers).
+Summary: If you just want to run Java programs, JRE is sufficient.
+
+JVM (Java Virtual Machine)
+Purpose: Abstract machine that executes Java bytecode.
+Includes: Only the runtime environment for interpreting and executing bytecode.
+Use Case: Core component for running Java programs; provides platform independence by translating bytecode to machine-specific code.
+Platform Dependency: JVM specification is platform-independent; implementations are platform-dependent.
+Summary: JVM is the engine that runs Java code and is included inside both JRE and JDK.
 
