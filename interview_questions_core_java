@@ -474,5 +474,109 @@ This code filters numbers greater than 10 and computes their sum in a single, re
 
 -------------------------------------------------------------------------------------------------------------------
 
+what is object ?
+
+In java object is an instance of a class hving the instance variables like the state of the object and the methods as the behaviour of the object.
+The Object of a class can be created by using the new keyword.
+
+------------------------------------------------------------------------------------
+
+what is class ?
+
+A class in Java is a blueprint or template that defines the properties (attributes/fields) and behaviors (methods/functions) of objects
+
+------------------------------------------------------------------------------------
+
+what is abstraction ?
+
+Abstraction in Java is an object-oriented programming concept that involves hiding the complex implementation details of a system 
+and exposing only the essential features or functionalities to the user. This allows developers and users to interact with objects or systems 
+without needing to understand or deal with their internal workings.
+
+------------------------------------------------------------------------------------
+
+what is encapsulation ?
+Encapsulation is a process of wrapping of data and methods in a single unit is called encapsulation.
+In OOP, data and methods operating on that data are combined together to form a single unit, which is referred to as a Class.
+
+Abstraction is implemented in Java using interface and abstract class
+while Encapsulation is implemented using private, package-private and protected access modifiers.
+Abstraction solves the problem in the design level. Whereas Encapsulation solves the problem in the implementation level.
+
+------------------------------------------------------------------------------------
+
+what is inheritance ?
+
+The Inheritance is a process of obtaining the data members and methods from one class to another class, plus can have its own is known as inheritance. 
+It is one of the fundamental features of object-oriented programming.
+Inheritance - IS-A relationship between a superclass and its subclasses.
+
+single -level
+Multi-level
+Hierarchical
+Multiple
+Hybrid
+
+Is-A Relationship
+------------------
+Definition:
+The is-a relationship represents inheritance between classes. It means one class (the child or subclass) is a specialized type of another class (the parent or superclass).
+
+How it’s implemented:
+Achieved using the extends keyword for class inheritance or implements for interface inheritance in Java.
+
+Example:
+Car extends Vehicle → A Car is a Vehicle.
+Dog extends Animal → A Dog is an Animal.
+
+Has-A Relationship
+-----------------
+Definition:
+The has-a relationship represents association or composition between classes. It means one class contains a reference to another class as a field, indicating ownership or usage.
+
+How it’s implemented:
+Achieved by declaring an instance variable of one class inside another class (object composition).
+
+Example:
+Car has an Engine → The Car class contains an Engine object.
+House has a Room → The House class contains Room objects.
+
+------------------------------------------------------------------------------------
+
+what is polymorphism ?
+
+The process of representing one form in multiple forms is known as Polymorphism.
+
+1. Compile time polymorphism or method overloading or static banding
+2. Runtime polymorphism or method overriding or dynamic binding
+
+static v/s dynamic & Compile-time v/s Run-time
+----------------------------------------------
+Static Polymorphism (Compile-Time Polymorphism)
+Static polymorphism is resolved at compile time. The compiler determines which method to call based on the method signature (name, number, and type of parameters).
+class Calculator {
+    int add(int a, int b) { return a + b; }
+    double add(double a, double b) { return a + b; }
+    int add(int a, int b, int c) { return a + b + c; }
+}
+
+Dynamic Polymorphism (Run-Time Polymorphism)
+Dynamic polymorphism is resolved at runtime. The Java Virtual Machine (JVM) determines which method to execute based on the actual object type, not the reference type.
+class Animal {
+    void makeSound() { System.out.println("Some sound"); }
+}
+class Dog extends Animal {
+    @Override
+    void makeSound() { System.out.println("Woof!"); }
+}
+Animal a = new Dog();
+a.makeSound(); // Output: Woof!
+
+overloading v/s Overriding
+----------------------------------------------
+Overloading is about having multiple methods with the same name but different parameters within the same class (compile-time).
+Overriding is about redefining a superclass method in a subclass with the same signature (runtime)
+
+------------------------------------------------------------------------------------
 
 
