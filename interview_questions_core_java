@@ -124,6 +124,355 @@ For custom objects, override these methods.
     }
 ----------------------------------------------------------------------------------------------------------------------------------
 
+What is the purpose of the final keyword in Java?
+
+The final keyword in Java is a non-access modifier used to impose restrictions on variables, methods, and classes, ensuring immutability or preventing modification in specific ways
+
+Final Variables
+When a variable is declared as final, its value can be assigned only once. After initialization, it cannot be changed, making it a constant.
+Example: final int MAX_USERS = 100;
+For instance variables, final allows initialization either at declaration or within the constructor.
+
+Final Methods
+Declaring a method as final prevents subclasses from overriding it. This is useful when you want to ensure that the method's implementation remains unchanged 
+for security, consistency, or performance reasons.
+Example:
+class Parent {
+    public final void show() {
+        System.out.println("This method cannot be overridden.");
+    }
+}
+Subclasses attempting to override a final method will result in a compilation error.
+
+Final Classes
+A class marked as final cannot be extended (subclassed) by any other class. This is often used to prevent inheritance for security or design reasons.
+Example:
+public final class Utility {
+    // Class code
+}
+No other class can inherit from a final class
+
+-------------------------------------------------------------------------------------------------------------------
+
+Explain the difference between ArrayList and LinkedList.
+
+The main difference between ArrayList and LinkedList in Java lies in their underlying data structures and how they handle operations like access, insertion, and deletion.
+
+Underlying Data Structures
+ArrayList uses a dynamic array to store elements. All elements are stored in contiguous memory locations, allowing fast access via indices.
+LinkedList uses a doubly linked list. Each element (node) contains the data and references to the previous and next nodes. Elements are not stored in contiguous memory, 
+but are connected via pointers.
+
+Choose ArrayList when you need fast random access and your application involves more read/search operations than insertions or deletions.
+Choose LinkedList when your application requires frequent additions or removals of elements, especially at the beginning or middle of the list
+
+-------------------------------------------------------------------------------------------------------------------
+What is the super keyword and how is it used?
+
+The super keyword in Java is used to refer to the immediate parent (superclass) of a class. It is primarily used in three ways:
+
+Usage	                               Syntax	                    Purpose
+Call parent method	              super.methodName()	    Invoke overridden method from parent class
+Call parent constructor	          super() or super(args)	Invoke parent class constructor in subclass constructor
+Access parent field	              super.fieldName	        Access field from parent class when shadowed in subclass
+
+-------------------------------------------------------------------------------------------------------------------
+What is a marker interface?
+
+A marker interface in Java is an interface that does not contain any methods, fields, or constants-in other words, it is completely empty. 
+Its primary purpose is to provide metadata or a signal to the Java Virtual Machine (JVM) or Java APIs that a class implementing this interface should be treated in a special way.
+
+How Marker Interfaces Work
+When a class implements a marker interface, it does not have to implement any methods.
+The presence of the marker interface allows runtime or compile-time mechanisms (such as the JVM or certain Java libraries) 
+to recognize that the class has a specific property or should receive special behavior.
+Marker interfaces are also called tag interfaces.
+
+-------------------------------------------------------------------------------------------------------------------
+
+What is a Singleton class and how do you implement it in Java?
+
+A Singleton class in Java is a design pattern that ensures a class has only one instance throughout the application's lifecycle and provides a global point of access to that instance. This is useful for managing shared resources like configuration settings, logging, caches, or connection pools.
+
+Key Characteristics of a Singleton
+Single Instance: Only one object of the class exists.
+Global Access: The instance is accessible globally via a static method.
+Private Constructor: Prevents other classes from instantiating the class directly.
+Thread Safety: In multi-threaded environments, ensures only one instance is created.
+ 
+Method	               Thread Safe	Lazy       Loaded	Notes
+Eager Initialization	  Yes	     No	       Simple, but may waste resources
+Lazy Initialization	      Yes 	     Yes	   Synchronized, slower
+Double-Checked Locking	  Yes	     Yes	   Efficient and safe
+Enum Singleton	          Yes	     Yes	   Most robust, recommended
+
+-------------------------------------------------------------------------------------------------------------------
+
+What is the difference between checked and unchecked exceptions?
+
+The difference between checked and unchecked exceptions in Java centers on when they are detected and how they are handled by the compiler and the programmer.
+
+Checked Exceptions
+Detected at compile time: The Java compiler checks for these exceptions during compilation. If a method can throw a checked exception, 
+it must either handle it with a try-catch block or declare it with a throws clause in the method signature.
+Examples: IOException, SQLException, ClassNotFoundException.
+Purpose: Usually represent conditions that a program can anticipate and recover from, such as file operations or database access issues.
+Must be handled: The compiler enforces handling or declaration of checked exceptions, ensuring the programmer addresses potential error conditions.
+
+Unchecked Exceptions
+Detected at runtime: These exceptions are not checked at compile time. The compiler does not require methods to handle or declare them.
+Examples: NullPointerException, ArrayIndexOutOfBoundsException, ArithmeticException.
+Purpose: Usually represent programming errors, such as logic mistakes or improper use of APIs (e.g., accessing a null object or dividing by zero).
+No mandatory handling: The compiler does not force the programmer to handle unchecked exceptions, though they can still be caught and managed if desired
+
+-------------------------------------------------------------------------------------------------------------------
+
+Explain the difference between == and .equals() in Java.
+
+The difference between == and .equals() in Java lies in what they compare and how they are used:
+
+== Operator
+Purpose: Compares references (memory addresses) for objects and values for primitives.
+With primitives: Checks if the values are the same.
+With objects: Checks if both references point to the exact same object in memory.
+
+.equals() Method
+Purpose: Compares the contents (state) of two objects.
+Default behavior: In the Object class, .equals() behaves like == (reference comparison).
+Overridden behavior: Many classes (like String, Integer) override .equals() to compare actual data inside objects.
+Cannot be used on primitives: Only works on objects.
+Can be overridden: Classes can provide their own logic for what it means for two instances to be "equal"
+
+-------------------------------------------------------------------------------------------------------------------
+What is a Java Package and why is it used?
+
+A Java package is a mechanism for grouping related classes, interfaces, and sub-packages into a single namespace, much like folders in a file system. 
+Packages help organize code logically, making it easier to manage, locate, and maintain, especially in large or complex projects
+
+Types of Packages
+Built-in Packages: Provided by Java (e.g., java.util, java.io), containing standard classes and interfaces.
+User-defined Packages: Created by developers to organize their own project’s classes and interfaces.
+
+-------------------------------------------------------------------------------------------------------------------
+How does try-catch-finally work in Java?
+
+The try-catch-finally construct in Java is used for robust exception handling and resource management.
+
+How It Works
+1. try Block
+Contains code that might throw an exception.
+If an exception occurs, the rest of the try block is skipped, and control moves to the matching catch block.
+
+2. catch Block
+Handles the specific exception thrown in the try block.
+You can have multiple catch blocks to handle different exception types.
+If the exception matches the type specified in the catch, the code inside that catch block executes.
+
+3. finally Block
+Contains code that will always execute after the try and catch blocks, regardless of whether an exception was thrown or caught.
+Commonly used for cleanup activities, such as closing files or releasing resources.
+The finally block executes even if there is a return statement in the try or catch block, or if an exception is thrown and not caught.
+The only exceptions to this are if the JVM exits (e.g., via System.exit()) or if the thread is killed before the finally block executes.
+
+-------------------------------------------------------------------------------------------------------------------
+
+What is the this keyword in Java and where is it used?
+
+The this keyword refers to the current object in Java and is essential for resolving naming conflicts, invoking class methods and constructors, 
+passing or returning the current object, and accessing outer class instances from inner classes
+
+Important Notes
+this cannot be used in static contexts, as static methods are not tied to any particular object instance.
+It is a reserved keyword in Java and cannot be used as an identifier.
+
+-------------------------------------------------------------------------------------------------------------------
+
+What is the Java Collections Framework? Name some important interfaces and classes.
+
+The Java Collections Framework is a unified architecture that provides a set of interfaces and classes for storing, retrieving, and manipulating groups of objects efficiently. 
+It standardizes how collections of data are handled in Java, making it easier to write reusable, high-performance, and maintainable code
+
+Important Interfaces
+Interface	       Description
+Collection	  Root interface for most collection classes; defines basic operations.
+List	      Ordered collection; allows duplicates (e.g., ArrayList, LinkedList).
+Set	          Unordered collection; no duplicate elements (e.g., HashSet, TreeSet).
+Queue	      For holding elements prior to processing, typically in FIFO order.
+Map	          Stores key-value pairs; keys are unique (e.g., HashMap, TreeMap).
+Note: Map is not a true subinterface of Collection, but is fully integrated with the framework.
+
+Important Classes
+Class	     Implements	                Description
+ArrayList	   List	                Dynamic array, fast random access.
+LinkedList	   List, Deque	        Doubly-linked list, efficient insertions.
+HashSet	       Set	                Hash table-based set, no duplicates.
+TreeSet	       Set, SortedSet	    Sorted set using a red-black tree.
+HashMap	       Map	                Hash table-based map, fast lookup.
+TreeMap	       Map, SortedMap	    Sorted map using a red-black tree.
+PriorityQueue  Queue	            Elements ordered by priority.
+Stack, Vector  List	                Legacy classes for stack and dynamic array.
+
+-------------------------------------------------------------------------------------------------------------------
+
+How does Java handle memory management?
+
+Java handles memory management automatically through the Java Virtual Machine (JVM), with the Garbage Collector (GC) playing a central role. Here’s how it works:
+
+JVM Memory Management
+The JVM divides memory into different regions, primarily the heap (where objects are stored) and other areas for method calls and stack frames.
+When a Java application runs, the JVM allocates memory for new objects on the heap.
+As the program executes, some objects become unreachable (no longer referenced by any part of the code).
+
+Role of the Garbage Collector
+Automatic Memory Management: The Garbage Collector automatically identifies and removes objects that are no longer reachable, freeing up memory and preventing memory leaks.
+Mark-and-Sweep Algorithm: The GC typically uses a mark-and-sweep approach:
+Mark phase: It traverses the object graph from root references and marks all reachable objects.
+Sweep phase: It reclaims memory occupied by unmarked (unreachable) objects.
+Generational Collection: The JVM heap is divided into generations (young and old). Most new objects are allocated in the young generation, 
+and those that survive several garbage collection cycles are moved to the old generation. Minor GC handles short-lived objects quickly, 
+while Major GC deals with long-lived objects and takes longer.
+Stop-the-World Events: During garbage collection, all application threads are paused until the process completes, ensuring consistency.
+
+Benefits
+No Manual Memory Management: Developers don’t need to explicitly allocate or free memory, reducing errors and improving productivity.
+Prevents Memory Leaks: By reclaiming unused memory, the GC helps prevent memory leaks and related performance issues.
+Optimized Performance: The GC can optimize memory usage and improve application stability and efficiency
+
+-------------------------------------------------------------------------------------------------------------------
+What is the difference between HashMap and TreeMap?
+
+The main differences between HashMap and TreeMap in Java are based on their underlying data structures, ordering, performance, and key/value constraints:
+
+Feature	                            HashMap	                                                          TreeMap
+Ordering	               No guaranteed order of keys or values	                          Maintains keys in sorted (ascending) order
+Underlying Structure	   Hash table (array of buckets, uses hashing)	                      Self-balancing Red-Black tree
+Performance	               O(1) average time for put/get/remove (fastest)	                  O(log n) time for put/get/remove
+Null Keys/Values	       Allows one null key and multiple null values	                      Does not allow null keys, but allows null values
+Use Case	               Best for fast, unordered access; when order doesn't matter	      Best when sorted order of keys is needed
+Interface Implemented	   Implements Map, Cloneable, Serializable	                          Implements NavigableMap, SortedMap, Cloneable, Serializable
+Key Requirements	       Keys must implement proper hashCode() and equals() methods	      Keys must be Comparable or provided with a Comparator
+
+Summary
+HashMap is preferred for most cases due to its fast O(1) operations and support for null keys, but it does not maintain any order of the keys or values.
+TreeMap is used when you need the keys to be sorted in natural or custom order, but its operations are slower (O(log n)) and it does not allow null keys.
+
+In short:
+Use HashMap for fast, unordered key-value storage. Use TreeMap when you need your keys sorted automatically
+
+-------------------------------------------------------------------------------------------------------------------
+What is the purpose of the transient keyword?
+
+When a field is marked as transient, the Java Virtual Machine (JVM) skips it during serialization, and its value is not saved. 
+Upon deserialization, the transient field will be initialized to its default value (e.g., null for objects, 0 for integers).
+
+Typical use cases for the transient keyword include:
+Protecting sensitive information (e.g., passwords, authentication tokens)
+Excluding temporary or derived data
+Avoiding serialization of runtime-specific resources (e.g., database connections, file streams)
+-------------------------------------------------------------------------------------------------------------------
+Explain the concept of Java Generics and its advantages.
+
+xplain the concept of Java Generics and its advantages.
+Java Generics is a feature that allows classes, interfaces, and methods to operate on different data types while providing compile-time type safety. 
+By using type parameters (such as <T>, <E>, etc.), generics enable developers to write more flexible and reusable code that can work with any reference type, 
+rather than being limited to a specific class.
+
+Concept of Java Generics
+Generic Classes and Interfaces: You can define a class or interface with type parameters, making it adaptable to various data types. 
+For example, ArrayList<T> can store any type of objects specified at instantiation.
+Generic Methods: Methods can be defined with type parameters, allowing them to operate on different data types without duplicating code.
+Type Parameterization: Type parameters are specified in angle brackets (<>) and allow the same code to handle multiple types safely.
+
+Advantages of Java Generics
+Type Safety: Generics enforce compile-time type checking, reducing the risk of runtime ClassCastException and ensuring that only compatible types are used.
+Code Reusability: You can write a single class, interface, or method that works with different data types, avoiding code duplication and making maintenance easier.
+Elimination of Explicit Casting: With generics, you don’t need to cast objects when retrieving them from collections, making code cleaner and less error-prone.
+Improved Readability and Maintainability: Generics make code easier to read and maintain by clearly specifying the intended data types and reducing boilerplate code.
+Performance: By avoiding unnecessary casting and enabling compile-time checks, generics can improve performance and reduce runtime overhead
+
+-------------------------------------------------------------------------------------------------------------------
+
+What are functional interfaces and how are they used in Java 8?
+
+What is a Functional Interface?
+A functional interface contains only one abstract method, though it can have multiple default or static methods.
+The @FunctionalInterface annotation is used for clarity and to instruct the compiler to enforce this rule, but it is not mandatory.
+Common examples: Runnable, Callable, Comparator, and new Java 8 interfaces like Function, Predicate, Consumer, and Supplier.
+
+How Are Functional Interfaces Used in Java 8?
+
+1. Lambda Expressions
+Functional interfaces are the target types for lambda expressions, enabling concise and readable code:
+Predicate<String> isEmpty = s -> s.isEmpty();
+Here, Predicate<T> is a functional interface, and the lambda provides its implementation.
+
+2. Method References
+They also serve as targets for method references:
+Consumer<String> printer = System.out::println;
+
+3. Stream API and Functional Programming
+Functional interfaces are widely used in the Java 8 Stream API, allowing operations like filtering, mapping, and consuming elements:
+List<String> names = Arrays.asList("Alice", "Bob");
+names.forEach(name -> System.out.println(name)); // Consumer<T>
+names.stream().filter(s -> s.length() > 3).collect(Collectors.toList()); // Predicate<T>
+
+Interface	            Abstract                   Method Description
+Predicate<T>	         boolean test(T t)	      Tests a condition and returns a boolean
+Function<T,R>	         R apply(T t)	          Takes an input and returns a result
+Consumer<T>	             void accept(T t)	      Performs an action on an input, returns nothing
+Supplier<T>	             T get()	              Supplies a result, takes no input
+BiFunction<T,U,R>	     R apply(T t, U u)	      Takes two inputs, returns a result
+BiPredicate<T,U>	     boolean test(T t, U u) 	Tests a condition on two inputs, returns a boolean
+BinaryOperator<T>	     T apply(T t1, T t2)	  Operates on two values of the same type, returns a value
+
+-------------------------------------------------------------------------------------------------------------------
+
+What is the Stream API in Java 8 and how does it help in processing data?
+
+The Stream API in Java 8 is a powerful feature that enables functional-style operations on sequences of elements, such as collections or arrays. 
+It allows developers to process data in a more concise, declarative, and readable manner compared to traditional loops.
+
+What is the Stream API?
+A stream is a sequence of elements that supports various operations which can be pipelined to produce a desired result.
+Streams do not store data; they operate on the source data structure (like a collection or array) and process elements on demand.
+The Stream API was introduced to overcome the limitations of external iteration (using loops) by providing internal iteration 
+and enabling operations such as filtering, mapping, sorting, and reducing data.
+
+How Does the Stream API Help in Processing Data?
+
+1. Declarative Data Processing
+Streams allow you to express complex data processing queries in a clear and concise way, similar to SQL-like operations.
+Example: Filtering, mapping, and collecting data can be done in a single pipeline:
+List<String> result = names.stream()
+    .filter(name -> name.startsWith("A"))
+    .sorted()
+    .collect(Collectors.toList());
+	
+2. Chaining Operations
+Streams support intermediate operations (like filter, map, distinct, sorted) that transform the stream, 
+and terminal operations (like collect, forEach, reduce) that produce a result or side effect.
+Multiple intermediate operations can be chained to build complex data processing pipelines.
+
+3. Parallel Processing
+Streams can be processed in parallel simply by using parallelStream(), which can improve performance for large data sets by leveraging multicore processors.
+
+4. Improved Readability and Maintainability
+Code using the Stream API is often shorter and easier to understand compared to traditional for-loops and manual iteration.
+
+5. Functional Programming Integration
+The Stream API works seamlessly with lambda expressions and functional interfaces, enabling a functional programming style in Java.
+
+Example
+
+List<Integer> numbers = Arrays.asList(5, 10, 15, 20, 25);
+int sum = numbers.stream()
+    .filter(n -> n > 10)
+    .mapToInt(Integer::intValue)
+    .sum();
+	
+This code filters numbers greater than 10 and computes their sum in a single, readable pipeline
+
+-------------------------------------------------------------------------------------------------------------------
 
 
 
