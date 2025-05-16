@@ -169,9 +169,10 @@ Optional Class	                              Avoids NullPointerException, reduce
 Streams API                                  	Lazy evaluation, reduces intermediate memory usage
 
 --------------------------------------------------------------------------------------------------------------------------------
+what is lambda expression?
 
-
-
+A lambda expression is a short block of code that takes in parameters and returns a value.
+it is used to write anonymous methods (functions) in a concise way—especially useful when working with functional interfaces.
 
 
 
