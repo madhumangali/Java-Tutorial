@@ -600,4 +600,208 @@ Includes: Only the runtime environment for interpreting and executing bytecode.
 Use Case: Core component for running Java programs; provides platform independence by translating bytecode to machine-specific code.
 Platform Dependency: JVM specification is platform-independent; implementations are platform-dependent.
 Summary: JVM is the engine that runs Java code and is included inside both JRE and JDK.
+-----------------------------------------------------------------------------------------------------
+Serilazation and where you used in project?
+
+Serialization is the process of converting an object’s state into a format (such as a byte stream or JSON/XML string) 
+that can be stored (in a file, database, or cache) or transmitted (over a network), and later reconstructed back into an identical object 
+through deserialization.
+
+By default, only non-static, non-transient fields are serialized, and only if their types are also serializable.
+Web APIs use JSON/XML and serialize objects through third-party libraries (Jackson), not Java’s native serialization -
+Java applications use Object-Relational Mapping (ORM) frameworks like JPA (Hibernate) or write SQL queries to manually convert objects 
+into rows and store primitive values (e.g., strings, ints, dates) in database columns.
+Java serialization = specific to serializing Java objects using Serializable.
+PDF, Excel, JSON, XML, etc. are external formats, not tied to Java’s serialization system.
+
+usecase:-
+redis :- when i was trying to save the data in to redis cache , i faced error for the field type LOcalDateTime, so is used Custom DE/Serialization
+by using JsonDE/Serialization
+
+--------------------------------------------------------------------------------------------------
+How Java code compiled?
+
+jdk -> compile (compiler) -> bytecode
+jre -> runs the program
+jvm -> converts bytecode to binary lanuage.
+
+1. Writing Source Code
+You write your Java code in files with the .java extension using a text editor or an IDE.
+
+2. Compiling Source Code
+The Java compiler (javac) takes your .java files and compiles them.
+During compilation, the compiler checks for syntax errors and converts the source code into bytecode.
+Bytecode is stored in .class files and is not specific to any platform
+
+3.Executing Bytecode
+The Java Virtual Machine (JVM) loads and executes the bytecode.
+The JVM interprets or just-in-time (JIT) compiles the bytecode into machine code specific to the operating system and hardware.
+This is what makes Java "write once, run anywhere": the same bytecode can run on any system with a compatible JVM
+
+-----------------------------------------------------------------------------------------------------------
+Singleton usage and it's program?
+
+The Singleton pattern is a creational design pattern that ensures a class has only one instance and provides a global point of access to it.
+This is useful when exactly one object is needed to coordinate actions across the system.
+
+Single-ton implementation can be done
+1. Classic (Lazy Initialization, Not Thread-Safe)
+2. Thread-Safe (Bill Pugh Singleton Implementation)
+3. Enum Singleton (Best Practice)
+
+Common Use Cases
+Configuration management: Only one configuration object should exist throughout the application.
+Logging: A single logger instance for consistent logging.
+Caching: Centralized cache manager.
+Thread pools, driver objects, or resource managers: To avoid multiple resource-intensive instances
+
+public enum ConfigManager {
+    INSTANCE;
+
+    private Properties config;
+
+    // Initialize configuration in the constructor (called once)
+    ConfigManager() {
+        config = new Properties();
+        try (InputStream input = new FileInputStream("config.properties")) {
+            config.load(input);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public String getProperty(String key) {
+        return config.getProperty(key);
+    }
+
+    public void setProperty(String key, String value) {
+        config.setProperty(key, value);
+    }
+}
+
+String dbUrl = ConfigManager.INSTANCE.getProperty("db.url");
+ConfigManager.INSTANCE.setProperty("app.name", "MyApp");
+
+-----------------------------------------------------------------------------------------------------------
+why Strings are immutable?
+
+Strings are immutable in Java because, once created, their value cannot be changed. Any operation that seems to modify a String actually 
+creates a new String object. 
+
+1. Security
+Strings are often used for sensitive data (like file paths, class names, network connections, and passwords).
+Immutability ensures that once a String is created, its value cannot be changed by malicious code or accidentally altered, 
+which is crucial for security-sensitive operations such as class loading and network connections
+
+2. String Pooling (Memory Efficiency)
+Java maintains a String pool to store unique String literals.
+When multiple references point to the same literal, they all share the same memory location.
+
+3. Thread Safety
+Immutable objects are inherently thread-safe because their state cannot change after creation.
+This allows Strings to be safely shared between threads without synchronization.
+
+4. Hashcode Caching
+Strings are commonly used as keys in hash-based collections (like HashMap or HashSet).
+
+5. Class Loading Reliability
+The Java class loader relies on Strings for loading classes by name.
+Immutability ensures that the class name cannot be changed once loaded, which is critical for the integrity of the class loading process
+
+-----------------------------------------------------------------------------------------------------------
+what is thread life cycle?
+
+NEW
+ ↓ (start())
+RUNNABLE
+ ↙           ↘
+WAITING   BLOCKED
+ ↘           ↙
+  TIMED_WAITING
+       ↓
+ TERMINATED
+
+-----------------------------------------------------------------------------------------------------------
+
+Explain hashmap internal working?
+
+A HashMap is a key-value data structure that allows fast lookup, insertion, and deletion of elements. It's part of java.util and 
+uses hashing to store and retrieve entries in constant time on average.
+
+| Concept            | Description                                              |
+| ------------------ | -------------------------------------------------------- |
+| **Key & Value**    | Every entry is a pair of key and value                   |
+| **Hash Function**  | Converts key into an integer (the hash code)             |
+| **Bucket (Index)** | The hash code is mapped to an index in an internal array |
+| **Collision**      | When two keys map to the same index                      |
+| **Load Factor**    | When to resize the internal array (default is `0.75`)    |
+
+Internally, a HashMap uses an array of buckets. Each bucket can be:
+null (empty),
+A single Node<K,V>,
+Or a linked list or balanced tree (if many keys collide).
+
+-----------------------------------------------------------------------------------------------------------
+Explain fails fast and fails safe?
+
+Fail-fast iterators immediately throw a ConcurrentModificationException if a collection is modified structurally (e.g., add/remove)
+after the iterator is created — except through the iterator itself.
+
+List<String> list = new ArrayList<>();
+list.add("A");
+list.add("B");
+
+for (String item : list) {
+    list.remove(item);  // ❌ Throws ConcurrentModificationException
+}
+
+Fail-safe iterators do not throw an exception even if the collection is modified during iteration. They usually operate on a clone (snapshot) 
+of the collection.
+
+CopyOnWriteArrayList<String> list = new CopyOnWriteArrayList<>();
+list.add("A");
+list.add("B");
+
+for (String item : list) {
+    list.remove(item);  // ✅ No exception
+}
+
+-----------------------------------------------------------------------------------------------------------
+what is the use of concurrent hash map?
+
+ConcurrentHashMap is a thread-safe, high-performance version of HashMap designed for use in multi-threaded environments. 
+It allows concurrent reads and writes without requiring external synchronization.
+
+It does not allow null keys or values.
+map.put(null, "value"); // ❌ NullPointerException
+Operations like put(), get(), remove() are highly optimized for concurrency.
+It doesn’t guarantee any iteration order — it's unordered.
+
+-----------------------------------------------------------------------------------------------------------
+what is the output for list.remove(2)?
+
+remove(int index) → removes by position
+remove(Object o) → removes the first occurrence of the object
+
+It removes the element at index 2 from the list.
+Returns the removed element.
+Throws IndexOutOfBoundsException if index 2 is invalid.
+
+List<String> list = new ArrayList<>();
+list.add("A"); // index 0
+list.add("B"); // index 1
+list.add("C"); // index 2
+list.add("D"); // index 3
+
+String removed = list.remove(2);
+System.out.println(removed);        // Output: C
+System.out.println(list);           // Output: [A, B, D]
+
+| Code                              | Result                            |
+| --------------------------------- | --------------------------------- |
+| `list.remove(2)`                  | Removes element at **index 2**    |
+| `list.remove((Integer) 2)`        | Removes **value 2** (first match) |
+| `list.remove(Integer.valueOf(2))` | Same — removes **value 2**        |
+
+-----------------------------------------------------------------------------------------------------------
 
