@@ -129,7 +129,18 @@ query to fecth all employees whose salary is greater than avg salary
 
 select * form employees where salary > (select avg(salary) from employees)
 ---------------------------------------------------------------------------------------------
+Indexes vs Views in sql?
 
+What is an Index?
+An index is a database object that improves the speed of data retrieval.
+It’s like an index in a book — helps the database quickly find rows without scanning the entire table.
+Created on one or more columns of a table.
+Can be unique or non-unique.
+
+What is a View?
+A view is a virtual table — a stored SELECT query.
+It does not store data physically (except materialized views).
+Used to simplify complex queries, encapsulate logic, and provide security (restrict columns/rows).
 ---------------------------------------------------------------------------------------------
 
 ---------------------------------------------------------------------------------------------
