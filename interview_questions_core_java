@@ -803,5 +803,55 @@ System.out.println(list);           // Output: [A, B, D]
 | `list.remove((Integer) 2)`        | Removes **value 2** (first match) |
 | `list.remove(Integer.valueOf(2))` | Same — removes **value 2**        |
 
------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------
+what is volatile keyword in java ?
+
+The volatile keyword in Java is used to indicate that a variable's value may be modified by multiple threads and that reads and writes to that variable are immediately visible to all threads.
+
+✅ Definition
+volatile dataType variableName;
+
+🔍 What It Does:
+
+Ensures Visibility:
+Changes made by one thread to a volatile variable are immediately visible to all other threads.
+Without volatile, a thread may cache the variable and not see updates made by other threads.
+
+Prevents Caching / Reordering:
+The variable is always read from and written to main memory.
+The JVM and CPU won't reorder instructions involving the volatile variable.
+
+❌ What It Does NOT Do:
+
+It does not guarantee atomicity of compound actions like x++, x = x + 1, etc.
+For atomic operations, use AtomicInteger, synchronized, or locks.
+
+✅ Example
+
+public class SharedObject {
+    private volatile boolean flag = false;
+
+    public void writer() {
+        flag = true; // change is visible to all threads
+    }
+
+    public void reader() {
+        if (flag) {
+            System.out.println("Flag was set to true");
+        }
+    }
+}
+Without volatile, the reader() thread might never see the updated value of flag.
+
+🔄 When to Use volatile
+When multiple threads read/write a simple boolean or status flag.
+For safe publication of a variable without using synchronization.
+When you don’t need full synchronization but just visibility guarantees.
+
+⚠️ When Not to Use
+For compound or multi-step operations (counter++, balance -= amount) – not thread-safe.
+When needing mutual exclusion – use synchronized or ReentrantLock.
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
 
