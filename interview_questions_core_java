@@ -853,5 +853,69 @@ For compound or multi-step operations (counter++, balance -= amount) – not thr
 When needing mutual exclusion – use synchronized or ReentrantLock.
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
+breifly explain about Runnable and Callable ?
+
+Both Runnable and Callable are interfaces used to define tasks that can be executed by threads, but they have key differences:
+
+✅ Runnable
+
+Interface: java.lang.Runnable
+
+Method: void run()
+
+Characteristics:
+Doesn't return any result
+Cannot throw checked exceptions
+Basic threading construct since Java 1.0
+
+Usage:
+
+Runnable task = () -> {
+    System.out.println("Running task");
+};
+new Thread(task).start();
+
+✅ Callable
+
+Interface: java.util.concurrent.Callable<V>
+
+Method: V call() throws Exception
+
+Characteristics:
+Returns a result (generic type V)
+Can throw checked exceptions
+Introduced in Java 5 as part of the Concurrency API
+
+Usage:
+
+Callable<String> task = () -> {
+    return "Task result";
+};
+ExecutorService executor = Executors.newSingleThreadExecutor();
+Future<String> future = executor.submit(task);
+
+When to Use Which
+----------------
+Use Runnable for fire-and-forget tasks
+
+Use Callable when you need:
+A return value
+Exception handling
+Integration with ExecutorService and Future
+
+Example with ExecutorService
+
+ExecutorService executor = Executors.newFixedThreadPool(2);
+
+// Runnable
+executor.execute(() -> System.out.println("Runnable task"));
+
+// Callable
+Future<Integer> future = executor.submit(() -> {
+    return 42; // Returns a value
+});
+
+Integer result = future.get(); // Blocks until result is available
+----------------------------------------------------------------------------------------------------------------------------------------------
 
 
