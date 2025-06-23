@@ -917,5 +917,55 @@ Future<Integer> future = executor.submit(() -> {
 
 Integer result = future.get(); // Blocks until result is available
 ----------------------------------------------------------------------------------------------------------------------------------------------
+✅ What are the different types of memory in JVM (Heap, Stack, Metaspace)?
+
+1️⃣ Heap Memory – "Where all objects live"
+It's the main memory where objects are created using new.
+
+It’s divided into:
+Young Generation (Eden + Survivor)
+Old Generation (Tenured)
+
+Garbage Collection mainly happens here.
+
+📌 In my project:
+I once debugged an OutOfMemoryError when a service processed a huge file. We analyzed the heap dump to check memory leaks.
+
+2️⃣ Stack Memory – "Where methods run"
+Stores method calls, local variables, and references.
+Each thread has its own stack.
+It's faster but limited in size.
+
+📌 Example:
+If you have deep recursion, it can cause a StackOverflowError — I faced this once during a file processing loop by mistake.
+
+3️⃣ Metaspace – "Stores class metadata"
+Replaced PermGen in Java 8.
+It stores class definitions (like structure of classes, methods, etc.)
+Grows automatically based on the classes loaded.
+
+📌 In real usage:
+Once we added a lot of third-party libraries, and JVM threw a Metaspace OutOfMemoryError. We fixed it by increasing -XX:MaxMetaspaceSize.
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+what is class Loader in java ?
+
+In Java, a ClassLoader is a part of the Java Runtime Environment (JRE) responsible for loading .class files (Java bytecode) into memory when needed during execution.
+It converts the .class file → Class object so it can be used by the JVM.
+
+🧠 Why is ClassLoader Important?
+
+Java uses dynamic loading, which means:
+Classes are not loaded into memory at program startup.
+They are loaded only when required, by the ClassLoader.
+
+🔍 Types of ClassLoaders in Java
+| ClassLoader                         | Parent    | Loads From                    | Role                                                          |
+| ----------------------------------- | --------- | ----------------------------- | ------------------------------------------------------------- |
+| **Bootstrap ClassLoader**           | —         | `rt.jar` or core Java classes | Loads Java core classes (`java.lang.*`, etc.)                 |
+| **Extension ClassLoader**           | Bootstrap | `lib/ext`                     | Loads classes from Java extensions                            |
+| **System/Application ClassLoader**  | Extension | `classpath`                   | Loads application-level classes                               |
+| **Custom/User-defined ClassLoader** | Any       | Custom path or logic          | Used to load classes from a DB, network, encrypted file, etc. |
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 
 
