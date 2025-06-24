@@ -38,16 +38,6 @@ Thread-Safety	                   ❌ No	                  ❌ No	               
 Usage	                           Modern collections	      Only for List	                 Legacy classes
 Methods                  hasNext(), next(), iterator()   hasPrevious, previous()         hasMoreElements(), nextElement(), .elements()
 ----------------------------------------------------------------------------------------------------------------------------------
-What is Serailizable?
-
-Serializable is a marker interface in Java that allows objects to be converted into a stream of bytes so they can be saved to a file, 
-transferred over a network, or stored in a database.
-
-1️⃣ Default serialization saves the entire object.
-2️⃣ Can be customized using transient keyword (prevents a field from being serialized).
-3️⃣ Can implement Externalizable for custom serialization logic.
-4️⃣ Not suitable for sensitive data (use encryption instead).
-----------------------------------------------------------------------------------------------------------------------------------
 how may types of interfaces are there?
 
 Java provides different types of interfaces based on their structure and functionality. Below are the 5 main types of interfaces:
@@ -547,7 +537,7 @@ what is polymorphism ?
 
 The process of representing one form in multiple forms is known as Polymorphism.
 
-1. Compile time polymorphism or method overloading or static banding
+1. Compile time polymorphism or method overloading or static binding
 2. Runtime polymorphism or method overriding or dynamic binding
 
 static v/s dynamic & Compile-time v/s Run-time
@@ -764,6 +754,16 @@ list.add("B");
 
 for (String item : list) {
     list.remove(item);  // ✅ No exception
+}
+-----------------------
+list.removeIf(item -> item.equals("B"));
+----------------------------
+Iterator<String> iterator = list.iterator();
+while (iterator.hasNext()) {
+    String item = iterator.next();
+    if (item.equals("B")) {
+        iterator.remove(); // Safe removal
+    }
 }
 
 -----------------------------------------------------------------------------------------------------------
