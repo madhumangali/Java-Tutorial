@@ -1,13 +1,28 @@
-Good afternoon. My name is Madhu. I am a Java backend developer with over three years of experience, currently working at Infovision in the steel manufacturing domain.
+Good afternoon. My name is Madhu. 
+Add :Education and Your native place. 
+
+Add one line about your family. 
+
+Coming to my professional career: 
+
+I am a Java backend developer with over three years of experience, currently working at Infovision in the steel manufacturing domain.
+Worked for previous company from ..... to ....year
+
+Joined infovision in 2022. 
+first 3 months i was under training and got opportunity to upgraded java/spring skills. 
 
 In my current project for JSW Steel, we are building the platform from scratch using modern tools such as Redis, Apache Kafka, and Spring Batch. 
-I have contributed to various modules, and independently developed the reporting services using JasperStudio. 
-This involved creating dynamic and static reports, dashboards, charts, and a SQL lab for data analysis.
+I have contributed to various modules, and independently developed the reporting framework as a microservice using JasperStudio. 
+Developed static reports, dashboards, charts, and a SQL lab for data analysis. This has capabilities to connect multiple databases and datasources.
+And also enhanced the framework with dynamic custom reports (as per customer requirements) which can connect to mutliple data sources with data integrity. 
 
 I have also worked on several POCs, including Redis, MapStruct, and Spring Batch, which led to significant improvements and were successfully implemented in our ongoing projects. 
-Additionally, I contributed to an MDM project under the guidance of our enterprise architect.
+Additionally, I contributed to an MDM project under the guidance of our enterprise architect.  This is a Low Code No Code MDM, devided into phases, i was part of the phase-1, 
+Developed common REST APIs, which can generate dynamic CRUD operations for any enity. No need to develop individual master data REST APIs. 
 
 Recently, our team has been exploring AI tools and plugins to enhance our development process, and I have been actively involved in completing related POCs. 
+As part of this POC or exploration, evaulted couple of tools... 
+
 To broaden my skill set and become a full-stack developer, I am currently learning frontend technologies such as HTML, CSS, and React.
 
 I am excited about opportunities where I can leverage my backend expertise, contribute to innovative projects, and continue to grow as a full-stack developer.
