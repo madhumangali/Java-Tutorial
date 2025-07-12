@@ -1,27 +1,23 @@
-Good afternoon. My name is Madhu. 
-Add :Education and Your native place. 
+Good evening.
+My name is Madhu, and I’m from Kurnool, Andhra Pradesh. I completed my Bachelor’s degree in Mechanical Engineering from G. Pulla Reddy Engineering College in 2020.
 
-Add one line about your family. 
+Coming to my professional career:
+ 
+I started my professional career with an internship at Pratian Technologies from January to May 2022.
+Post that, I joined Infovision, where I’ve been working as a Java Backend Developer for over three years, primarily in the steel manufacturing domain.
+Currently, I’m part of a project for JSW Steel, where we're building a platform from scratch using modern technologies like Spring Boot, Apache Kafka, Spring Batch, and Redis.
 
-Coming to my professional career: 
+I have contributed to various modules, and independently developed a reporting microservice using JasperReports and JasperStudio. 
+It supports static reports, dashboards, charts, and an SQL lab for querying data.
+And enhanced the framework with dynamic custom reports (as per customer requirements) which can connect to mutliple data sources with data integrity. 
 
-I am a Java backend developer with over three years of experience, currently working at Infovision in the steel manufacturing domain.
-Worked for previous company from ..... to ....year
-
-Joined infovision in 2022. 
-first 3 months i was under training and got opportunity to upgraded java/spring skills. 
-
-In my current project for JSW Steel, we are building the platform from scratch using modern tools such as Redis, Apache Kafka, and Spring Batch. 
-I have contributed to various modules, and independently developed the reporting framework as a microservice using JasperStudio. 
-Developed static reports, dashboards, charts, and a SQL lab for data analysis. This has capabilities to connect multiple databases and datasources.
-And also enhanced the framework with dynamic custom reports (as per customer requirements) which can connect to mutliple data sources with data integrity. 
-
-I have also worked on several POCs, including Redis, MapStruct, and Spring Batch, which led to significant improvements and were successfully implemented in our ongoing projects. 
 Additionally, I contributed to an MDM project under the guidance of our enterprise architect.  This is a Low Code No Code MDM, devided into phases, i was part of the phase-1, 
-Developed common REST APIs, which can generate dynamic CRUD operations for any enity. No need to develop individual master data REST APIs. 
+where I developed dynamic REST APIs that support CRUD operations for any entity without writing repetitive code.
 
-Recently, our team has been exploring AI tools and plugins to enhance our development process, and I have been actively involved in completing related POCs. 
-As part of this POC or exploration, evaulted couple of tools... 
+I have also worked on several POCs, including Redis, MapStruct, and Spring Batch, which led to significant improvements and were successfully implemented in our ongoing projects.
+
+Recently, our team has been exploring AI tools and plugins to enhance our development process, and I have been actively involved in it. 
+As part of exploration, evaulted couple of tools like perplexity, jhipster , intellj with junie,
 
 To broaden my skill set and become a full-stack developer, I am currently learning frontend technologies such as HTML, CSS, and React.
 
